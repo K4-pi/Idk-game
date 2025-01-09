@@ -1,19 +1,10 @@
-#include "raylib.h"
-#include <cmath>
+#include <raylib.h>
+#include "gmath.hpp"
 
 typedef struct Player {
     Vector2 position;
     float speed;
 } Player;
-
-Vector2 NormalizeVector2(Vector2 v) {
-    float magnitude = sqrtf(v.x * v.x + v.y * v.y); // Calculate vector magnitude
-    if (magnitude != 0) {
-        v.x /= magnitude; // Normalize x-component
-        v.y /= magnitude; // Normalize y-component
-    }
-    return v;
-}
 
 void game(int fps) {
     const int screenWidth = 800;
@@ -40,7 +31,8 @@ void game(int fps) {
         else if (IsKeyDown(KEY_DOWN)) direction.y = 1.0f;
         else direction.y = 0.0f;
 
-        direction = NormalizeVector2(direction);
+        // Vector normalization
+        NormalizeVector2(&direction);
 
         player.position.x += direction.x * moveSpeed;
         player.position.y += direction.y * moveSpeed;
