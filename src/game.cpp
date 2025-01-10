@@ -8,8 +8,8 @@ typedef struct Player {
     float speed;
 } Player;
 
-void game(int fps, int screenWidth, int screenHeight) {
-
+void game(int fps, int screenWidth, int screenHeight)
+{
     const float moveSpeed = 1.5f;
 
     Player player = { 0 }; //Initializing all variables
