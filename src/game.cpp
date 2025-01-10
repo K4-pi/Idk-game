@@ -7,6 +7,18 @@ typedef struct Player {
     float speed;
 } Player;
 
+void DrawMap()
+{
+    Vector2 drawPos = { 0 };
+
+    for(int x = 0; x < 10; x++)
+    {
+        DrawRectangle(drawPos.x, drawPos.y, 100, 100, GREEN);
+        drawPos.x += 100;
+        drawPos.y += 100;
+    }
+}
+
 void game(int fps, int screenWidth, int screenHeight)
 {
     InitWindow(screenWidth, screenHeight, "Game title");
@@ -49,11 +61,13 @@ void game(int fps, int screenWidth, int screenHeight)
         // Rendering
         BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+            ClearBackground(RAYWHITE); //Needs to be before BeginMode2D
 
             BeginMode2D(camera);
 
                 DrawRectangle(player.position.x, player.position.y, 50, 50, RED);
+
+                DrawMap();
 
                 DrawRectangle(550, 550, 100, 100, BLUE); // TEST OBJECT
 
