@@ -1,7 +1,7 @@
 #include <raylib.h> // version 5.5
 #include <cmath>
 
-#include "gmath.hpp"
+#include "gmath.h"
 
 void NormalizeVector2(Vector2* v)
 {

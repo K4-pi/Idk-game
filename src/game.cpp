@@ -1,7 +1,7 @@
 #include <raylib.h> // version 5.5
 
-#include "game.hpp"
-#include "gmath.hpp"
+#include "game.h"
+#include "gmath.h"
 
 typedef struct Player {
     Vector2 position;
