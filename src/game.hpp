@@ -1,5 +1,6 @@
-#include "game.cpp"
+#ifndef GAME_HPP
+#define GAME_HPP
 
-void game(int fps);
+void game(int fps, int screenWidth, int screenHeight);
 
-Vector2 NormalizeVector2(Vector2 v);
+#endif

@@ -1,6 +1,9 @@
 #include "src/game.hpp"
 
 int main(void) {
-    game(60);
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+
+    game(60, screenWidth, screenHeight);
     return 0;
 }

@@ -1,4 +1,6 @@
-#include <raylib.h>
+#include <raylib.h> // version 5.5
+
+#include "game.hpp"
 #include "gmath.hpp"
 
 typedef struct Player {
@@ -6,12 +8,7 @@ typedef struct Player {
     float speed;
 } Player;
 
-void game(int fps) {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "Game title");
-    SetTargetFPS(fps);
+void game(int fps, int screenWidth, int screenHeight) {
 
     const float moveSpeed = 1.5f;
 
@@ -20,6 +17,9 @@ void game(int fps) {
     player.position.y = screenHeight / 2;
 
     Vector2 direction = { 0 };
+
+    InitWindow(screenWidth, screenHeight, "Game title");
+    SetTargetFPS(fps);
 
     while (!WindowShouldClose()) {
         // Functionality
@@ -44,7 +44,6 @@ void game(int fps) {
             ClearBackground(RAYWHITE);
 
         EndDrawing();
-
     }
 
     CloseWindow();
