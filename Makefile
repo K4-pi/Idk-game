@@ -1,7 +1,7 @@
 all: compile run
 
 compile:
-	g++ main.cpp src/*.cpp -o run.exe -Isrc/ -lraylib -lgdi32 -lwinmm -Wall
+	g++ main.cpp src/*.cpp -o run-x64.exe -Isrc/ -m64 -lraylib -lgdi32 -lwinmm -Wall
 
 run:
-	run.exe
+	run-x64.exe
