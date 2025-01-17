@@ -1,6 +1,6 @@
 #ifndef GMATH_H
 #define GMATH_H
 
-void NormalizeVector2(Vector2* v);
+Vector2 NormalizeVector2(Vector2* v);
 
 #endif

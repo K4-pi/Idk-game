@@ -7,19 +7,20 @@
 #include "gmath.h"
 #include "gdraw.h"
 
-typedef struct Player {
-    Vector2 position;
-    float speed;
-} Player;
-
 void game(int fps, int screenWidth, int screenHeight)
 {
+    typedef struct Player {
+        Vector2 position;
+        float speed;
+        float size;
+    } Player;
+
     InitWindow(screenWidth, screenHeight, "Game title");
     SetTargetFPS(fps);
     ToggleFullscreen(); // Needs proper mechanic
 
-    const float moveSpeed = 1.5f;
-
+    float deltaTime;
+    
     std::ifstream file("resources/map/map.txt");
 
     Texture2D stoneTexture[] = {LoadTexture("resources/textures/stone/stone1.png"),
@@ -27,9 +28,10 @@ void game(int fps, int screenWidth, int screenHeight)
                                 LoadTexture("resources/textures/stone/stone3.png")};
     
     Player player = { 0 }; //Initializing all variables
-    player.position.x = 100;
-    player.position.y = 100;
+    player.position.x = 100.0f;
+    player.position.y = 100.0f;
 
+    const float moveSpeed = 60.0f;
     Vector2 direction = { 0 };
 
     // Camera variables
@@ -40,23 +42,25 @@ void game(int fps, int screenWidth, int screenHeight)
 
     while (!WindowShouldClose()) 
     {
+        deltaTime = GetFrameTime();
+
         // Functionality
         if (IsKeyDown(KEY_RIGHT)) direction.x = 1.0f;
-        else if (IsKeyDown(KEY_LEFT)) direction.x = -1.0f;
-        else direction.x = 0.0f;
-
+        if (IsKeyDown(KEY_LEFT)) direction.x = -1.0f;
+        
         if (IsKeyDown(KEY_UP)) direction.y = -1.0f;
-        else if (IsKeyDown(KEY_DOWN)) direction.y = 1.0f;
-        else direction.y = 0.0f;
+        if (IsKeyDown(KEY_DOWN)) direction.y = 1.0f;
 
         // Vector normalization
-        NormalizeVector2(&direction);
+        direction = NormalizeVector2(&direction);
 
-        player.position.x += direction.x * moveSpeed;
-        player.position.y += direction.y * moveSpeed;
+        player.position.x += direction.x * moveSpeed * deltaTime;
+        player.position.y += direction.y * moveSpeed * deltaTime;
+        
+        direction = {0, 0}; // zeroing direction
 
         // Camera follows player
-        camera.target = (Vector2){ player.position.x + 25, player.position.y + 25};
+        camera.target = (Vector2){ player.position.x + 25.0f, player.position.y + 25.0f};
 
         // Rendering
         BeginDrawing();
